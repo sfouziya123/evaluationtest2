@@ -1,0 +1,91 @@
+<!DocType HTML>
+<html>
+	<head>
+		<title>Marvels</title>
+		<style>
+			.Navbar
+			{
+				border:solid 4px white;	
+				height:100px;
+				position:fixed;
+				width:100%;
+				top:0px;
+				left:0px;
+				background-color:skyblue;
+				
+			}
+			p
+			{
+				text-align:center;
+				font-size:30px;	
+				color:white;
+			}
+			input
+			{
+				margin-top:180px;
+				margin-left:550px;
+				padding:10px 40px 10px 40px;
+				border-radius:5px;
+			}
+			button
+			{
+				padding:10px;
+				border-radius:5px;
+			}
+		
+		</style>
+	
+	</head>
+	<body>
+		<div class = "Navbar">
+			<p><b>Awesome Marvels</b></p>
+		</div>
+		<div class = "input">
+			<input type = "text" placeholder = "Enter the marvelName">
+			<button class = "search" onclick = "search()">Search</button>
+		
+		</div>
+		
+		<div class = "marvel">
+		
+		</div>
+		
+	
+	</body>
+	
+	<script>
+
+		let marvel = document.querySelector(".marvel");
+
+		async function search()
+		{
+				
+				
+			let search = document.querySelector(".search").value;
+
+			let result = await fetch(`https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${search}`);
+			let response = await response.json();
+			console.log(response)
+			console.log(result)
+			main.innerText = " ";
+			let repos = result["items"];
+			if(repos.length != 0){
+				let div=document.createElement("div");
+
+				let imgTag = document.createElement("img");
+				imgTag.setAttribute("src", movieposter.marvel);
+				imgTag.style.width = "100px";
+				imgTag.style.height = "100px";
+
+				let titleTag = document.createElement("div");
+				titleTag.innerText = movietitle.marvel;
+
+				div.setAttribute("onclick", `displaymoviedetails(${index})`);
+				div.append(imagTag,titleTag);
+				marvel.append(div);
+			}
+		}
+
+	
+	</script>
+</html>	
